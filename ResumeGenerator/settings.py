@@ -46,6 +46,8 @@ TEMPLATES = [
     },
 ]
 
+DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+
 WSGI_APPLICATION = 'ResumeGenerator.wsgi.application'
 
 DATABASES = {
