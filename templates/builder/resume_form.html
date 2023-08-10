@@ -1,0 +1,12 @@
+{% extends 'builder/base.html' %}
+
+{% block content %}
+	<form method="post" action="{% url 'generate_pdf' %}">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+        <button type="submit" formaction="{% url 'generate_pdf' %}" class="btn btn-primary">Generate PDF</button>
+    </div>
+</form>
+{% endblock %}
