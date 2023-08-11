@@ -6,7 +6,8 @@ from ResumeGenerator import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('builder.urls')),
-    path('', include('accounts.urls'))
+    path('', include('accounts.urls')),
+    path('', include('converter.urls')),
 ]
 
 if settings.DEBUG:

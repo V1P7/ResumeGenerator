@@ -1,15 +1,10 @@
 import os
-
 from django.shortcuts import render, redirect
-from reportlab.lib.utils import ImageReader
-
 from ResumeGenerator import settings
 from .forms import ResumeForm
 import io
 from django.http import FileResponse
 from reportlab.pdfgen import canvas
-from reportlab.platypus import Image
-from django.core.files.storage import default_storage
 
 
 def index(request):
@@ -18,7 +13,7 @@ def index(request):
 	context = {
 		'title': title,
 	}
-	return render(request, 'accounts/index.html', context)
+	return render(request, 'builder/index.html', context)
 
 
 def create_resume(request):
@@ -118,7 +113,8 @@ def generate_pdf(request):
 			
 			buffer.seek(0)
 			response = FileResponse(buffer, content_type = 'application/pdf')
-			response['Content-Disposition'] = f'attachment; filename="{data["first_name"]}_{data["last_name"]}_resume.pdf"'
+			response[
+				'Content-Disposition'] = f'attachment; filename="{data["first_name"]}_{data["last_name"]}_resume.pdf"'
 			
 			return response
 	else:

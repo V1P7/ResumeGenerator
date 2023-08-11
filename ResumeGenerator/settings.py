@@ -15,6 +15,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'builder.apps.BuilderConfig',
     'accounts.apps.AccountsConfig',
+    'converter.apps.ConverterConfig'
 ]
 
 MIDDLEWARE = [
