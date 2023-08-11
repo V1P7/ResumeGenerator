@@ -2,46 +2,22 @@
 
 {% block content %}
   <div class="container">
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
-        <li><a href="#" class="nav-link px-2">Create Resume in PDF</a></li>
-        <li><a href="#" class="nav-link px-2">Convert Docx to PDF</a></li>
-        <li><a href="#" class="nav-link px-2">Convert PDF to Docx</a></li>
-        <div class="dropdown">
-  <button class="btn btn-outline-primary me-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Other
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">Пункт 1</a>
-    <a class="dropdown-item" href="#">Пункт 2</a>
-    <a class="dropdown-item" href="#">Пункт 3</a>
-  </div>
-</div>
-      </ul>
-
-      <div class="col-md-3 text-end">
-        <button type="button" class="btn btn-outline-primary me-2">Login</button>
-        <button type="button" class="btn btn-primary">Sign-up</button>
-      </div>
-    </header>
-  <div class="container my-5">
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb breadcrumb-chevron p-3 bg-body-tertiary rounded-3">
-      <li class="breadcrumb-item">
-        <a class="link-body-emphasis" href="#">
-          <i class="fas fa-cog"></i>
-          <span class="visually-hidden">Home</span>
-        </a>
-      </li>
-      <li class="breadcrumb-item">
-        <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">Library</a>
-      </li>
-      <li class="breadcrumb-item active" aria-current="page">
-        Data
-      </li>
-    </ol>
-  </nav>
-</div>
+      <div class="container my-5">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-chevron p-3 bg-body-tertiary rounded-3">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index' %}">
+                <i class="fas fa-home" style="color: black;"></i>
+            </a>
+          </li>
+          <li class="breadcrumb-item">
+            <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">Library</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Data
+          </li>
+        </ol>
+      </nav>
+    </div>
   </div>
 {% endblock %}

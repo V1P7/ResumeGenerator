@@ -17,7 +17,7 @@
         <!-- FONTS INCLUDED ON THIS PAGE - START -->
 
         <!-- CORE CSS TEMPLATE - START -->
-        <link rel="stylesheet" href="path/to/font-awesome/css/all.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
          <link href="{% static 'builder/css/style.css' %}" rel="stylesheet" type="text/css"/>
         <!-- CORE CSS TEMPLATE - END -->
@@ -98,6 +98,63 @@
     </style>
 </head>
 <body>
+<div class="container">
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <a href="{% url 'index' %}" class="nav-link link-dark">Home</a>
+          <a href="{% url 'generate_pdf' %}" class="nav-link link-dark">Create Resume</a>
+          <div class="dropdown">
+              <button class="btn btn-outline me-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Converters
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">Convert Docx to PDF</a>
+                  <a class="dropdown-item" href="#">Convert PDF to Docx</a>
+              </div>
+            </div>
+        <div class="dropdown">
+              <button class="btn btn-outline me-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Actions with pdf
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">Split PDF</a>
+                  <a class="dropdown-item" href="#">Merge PDF</a>
+                  <a class="dropdown-item" href="#">Extract pages</a>
+                  <a class="dropdown-item" href="#">Removing pages </a>
+              </div>
+            </div>
+          <div class="dropdown">
+              <button class="btn btn-outline me-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Other
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">File password</a>
+                  <a class="dropdown-item" href="#">Delete metadata</a>
+                  <a class="dropdown-item" href="#">Adding an electronic signature</a>
+                  <a class="dropdown-item" href="#">File optimization</a>
+              </div>
+          </div>
+          <div class="dropdown">
+              <button class="btn btn-outline me-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Watermark
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">Add Watermark</a>
+                  <a class="dropdown-item" href="#">Delete Watermark</a>
+              </div>
+          </div>
+      </ul>
+      <div class="col-md-3 text-end">
+          <a href="{% url 'signin' %}">
+            <button type="button" class="btn btn-outline-dark">Login</button>
+          </a>
+
+          <a href="{% url 'signup' %}">
+            <button type="button" class="btn btn-dark">Sign-up</button>
+          </a>
+        </div>
+    </header>
+</div>
 {% block content %}
 	
 {% endblock %}
