@@ -1,12 +1,29 @@
 {% extends 'builder/base.html' %}
 
 {% block content %}
-	<form method="post" enctype="multipart/form-data" action="{% url 'generate_pdf' %}">
+    <div class="container">
+      <div class="container my-5">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-chevron p-3 bg-body-tertiary rounded-3">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index' %}">
+                <i class="fas fa-home" style="color: black;"></i>
+            </a>
+          </li>
+          <li class="breadcrumb-item">
+            <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">Create Resume</a>
+          </li>
+        </ol>
+      </nav>
+    </div>
+
+	<form method="post" class="form-control" enctype="multipart/form-data" action="{% url 'generate_pdf' %}">
     {% csrf_token %}
     <div class="form-group">
         {{ form.as_p }}
-        <button type="submit">Save</button>
-        <button type="submit" formaction="{% url 'generate_pdf' %}" class="btn btn-primary">Generate PDF</button>
+        <button type="submit" class="btn btn-dark">Save</button>
+        <button type="submit" formaction="{% url 'generate_pdf' %}" class="btn btn-dark">Generate PDF</button>
     </div>
-</form>
+    </form>
+    </div>
 {% endblock %}

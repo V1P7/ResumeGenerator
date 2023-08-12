@@ -15,6 +15,11 @@ class ResumeForm(forms.ModelForm):
         fields = '__all__'
 
         widgets = {
+            'first_name': forms.TextInput(attrs = {'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs = {'class': 'form-control'}),
+            'email': forms.TextInput(attrs = {'class': 'form-control'}),
+            'city': forms.TextInput(attrs = {'class': 'form-control'}),
+            'social': forms.TextInput(attrs = {'class': 'form-control'}),
             'phone_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '+380-123-456-789'}),
             'motivation_letter': forms.Textarea(attrs={'class': 'form-control'}),
         }
