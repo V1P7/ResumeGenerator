@@ -16,6 +16,10 @@
         </ol>
       </nav>
     </div>
-
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="docx_file">
+            <button type="submit">Convert to PDF</button>
+        </form>
   </div>
 {% endblock %}

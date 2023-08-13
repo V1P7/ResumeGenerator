@@ -1,18 +1,49 @@
+import io
 from django.shortcuts import render
 from django.http import HttpResponse
 import os
 import tempfile
 from PyPDF2 import PdfReader
+import docx
 from docx import Document
+from docx.shared import Inches
+import pypdf
+from reportlab.lib.pagesizes import landscape, letter
+from reportlab.pdfgen import canvas
+
+
+def docx_to_pdf(docx_path):
+	pdf_path = os.path.splitext(docx_path)[0] + '.pdf'
+	
+	c = canvas.Canvas(pdf_path, pagesize = landscape(letter))
+	c.drawString(100, 750, "Converted from DOCX to PDF")
+	c.showPage()
+	c.save()
+	
+	return pdf_path
 
 
 def to_pdf(request):
 	title = "To PDF"
+	if request.method == 'POST' and request.FILES.get('docx_file'):
+		docx_file = request.FILES['docx_file']
+		docx_path = os.path.join(tempfile.gettempdir(), docx_file.name)
+		with open(docx_path, 'wb') as f:
+			for chunk in docx_file.chunks():
+				f.write(chunk)
+		
+		pdf_path = docx_to_pdf(docx_path)
+		
+		with open(pdf_path, 'rb') as pdf_file:
+			response = HttpResponse(pdf_file, content_type = 'application/pdf')
+			response['Content-Disposition'] = f'attachment; filename={os.path.basename(pdf_path)}'
+			f.close()
+			return response
 	
 	context = {
-		'title': title,
-		
+		'title': title
 	}
+	
 	return render(request, 'converter/to_pdf.html', context)
 
 
