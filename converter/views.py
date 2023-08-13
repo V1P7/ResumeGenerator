@@ -1,52 +1,53 @@
-import io
-from django.shortcuts import render
-from django.http import HttpResponse
-import os
 import tempfile
 from PyPDF2 import PdfReader
-import docx
+import os
+import subprocess
+from django.http import HttpResponse
+from django.shortcuts import render
 from docx import Document
-from docx.shared import Inches
-import pypdf
-from reportlab.lib.pagesizes import landscape, letter
-from reportlab.pdfgen import canvas
 
 
-def docx_to_pdf(docx_path):
-	pdf_path = os.path.splitext(docx_path)[0] + '.pdf'
-	
-	c = canvas.Canvas(pdf_path, pagesize = landscape(letter))
-	c.drawString(100, 750, "Converted from DOCX to PDF")
-	c.showPage()
-	c.save()
-	
-	return pdf_path
+# def docx_to_pdf(docx_path):
+# 	pdf_path = os.path.splitext(docx_path)[0] + '.pdf'
+#
+# 	c = canvas.Canvas(pdf_path, pagesize = landscape(letter))
+# 	c.drawString(100, 750, "Converted from DOCX to PDF")
+# 	c.showPage()
+# 	c.save()
+#
+# 	return pdf_path
 
 
 def to_pdf(request):
-	title = "To PDF"
-	if request.method == 'POST' and request.FILES.get('docx_file'):
+	title = 'To PDF'
+	if request.method == 'POST':
+		
 		docx_file = request.FILES['docx_file']
-		docx_path = os.path.join(tempfile.gettempdir(), docx_file.name)
-		with open(docx_path, 'wb') as f:
+		
+		# Сохраняем загруженный DOCX файл
+		filepath = '/tmp/' + docx_file.name
+		with open(filepath, 'wb+') as destination:
 			for chunk in docx_file.chunks():
-				f.write(chunk)
+				destination.write(chunk)
 		
-		pdf_path = docx_to_pdf(docx_path)
+		# Определяем пути для исходного и конвертированного файла
+		docx_path = filepath
+		pdf_path = os.path.splitext(filepath)[0] + '.pdf'
 		
+		# Конвертируем DOCX в PDF через LibreOffice
+		subprocess.run(['/usr/bin/libreoffice', '--convert-to', 'pdf', docx_path, '--outdir', pdf_path])
+		
+		# Читаем PDF файл и возвращаем в ответе
 		with open(pdf_path, 'rb') as pdf_file:
-			response = HttpResponse(pdf_file, content_type = 'application/pdf')
-			response['Content-Disposition'] = f'attachment; filename={os.path.basename(pdf_path)}'
-			f.close()
+			response = HttpResponse(pdf_file.read(), content_type = 'application/pdf')
+			response['Content-Disposition'] = 'inline;filename=' + os.path.basename(pdf_path)
 			return response
-	
 	context = {
 		'title': title
 	}
-	
 	return render(request, 'converter/to_pdf.html', context)
-
-
+	
+	
 def pdf_to_docx(pdf_path):
 	pdf = PdfReader(pdf_path)
 	doc = Document()
