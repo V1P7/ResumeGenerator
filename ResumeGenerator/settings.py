@@ -15,7 +15,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'builder.apps.BuilderConfig',
     'accounts.apps.AccountsConfig',
-    'converter.apps.ConverterConfig'
+    'converter.apps.ConverterConfig',
+    'helper.apps.HelperConfig',
 ]
 
 MIDDLEWARE = [
@@ -87,5 +88,3 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

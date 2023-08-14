@@ -8,6 +8,7 @@ urlpatterns = [
     path('', include('builder.urls')),
     path('', include('accounts.urls')),
     path('', include('converter.urls')),
+    path('', include('helper.urls')),
 ]
 
 if settings.DEBUG:

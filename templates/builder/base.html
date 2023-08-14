@@ -128,10 +128,10 @@
                 Other
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">File password</a>
-                  <a class="dropdown-item" href="#">Delete metadata</a>
-                  <a class="dropdown-item" href="#">Adding an electronic signature</a>
-                  <a class="dropdown-item" href="#">File optimization</a>
+                  <a class="dropdown-item" href="{% url 'add_password' %}">File password</a>
+                  <a class="dropdown-item" href="{% url 'delete_metadata' %}">Delete metadata</a>
+                  <a class="dropdown-item" href="{% url 'add_signature' %}">Adding an electronic signature</a>
+                  <a class="dropdown-item" href="{% url 'optimize_file' %}">File optimization</a>
               </div>
           </div>
           <div class="dropdown">
