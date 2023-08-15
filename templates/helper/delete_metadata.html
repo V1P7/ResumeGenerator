@@ -19,7 +19,7 @@
         <form method="post" enctype="multipart/form-data" action="{% url 'delete_metadata' %}">
         {% csrf_token %}
         <input type="file" name="pdf_file">
-        <button type="submit">Convert</button>
+        <button type="submit">Delete Metadata</button>
     </form>
   </div>
 {% endblock %}
