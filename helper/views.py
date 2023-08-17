@@ -1,10 +1,10 @@
 import io
 import PyPDF2
-import pikepdf
+from PIL import Image
 from django.http import HttpResponse
 from django.shortcuts import render
 from io import BytesIO
-import pypdfium2
+from PIL import Image as PilImage
 import pdfrw
 
 
@@ -69,9 +69,44 @@ def delete_metadata(request):
 	return render(request, 'helper/delete_metadata.html', context)
 
 
+def add_image_signature(pdf_file, signature_image):
+	input_pdf = PyPDF2.PdfReader(pdf_file)
+	first_page = input_pdf.pages[0]
+	
+	pdf_writer = PyPDF2.PdfWriter()
+	pdf_writer.add_page(first_page)
+	
+	signature_image_obj = PilImage.open(signature_image)
+	
+	signature_bytes = io.BytesIO()
+	signature_image_obj.save(signature_bytes, format = 'PNG')
+	signature_image_bytes = signature_bytes.getvalue()
+	
+	signature_image_obj = Image.open(io.BytesIO(signature_image_bytes))
+	
+	input_pdf.addImage(signature_image_obj, 0, 0, 100, 100)
+	
+	output = PyPDF2.PdfFileWriter()
+	output.addPage(input_pdf.getPage(0))
+	
+	signed_pdf = io.BytesIO()
+	output.write(signed_pdf)
+	
+	signed_pdf.seek(0)
+	
+	return signed_pdf
+
+
 def add_signature(request):
 	title = "Add Signature"
-	
+	if request.method == 'POST':
+		pdf_file = request.FILES['pdf_file']
+		signature_image = request.FILES['image_signature']
+		
+		signed_pdf = add_image_signature(pdf_file, signature_image)
+		response = HttpResponse(signed_pdf, content_type = 'application/pdf')
+		response['Content-Disposition'] = 'attachment; filename="signed_pdf"'
+		return response
 	context = {
 		'title': title,
 	}

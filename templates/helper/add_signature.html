@@ -19,7 +19,8 @@
         <form method="post" enctype="multipart/form-data" action="{% url 'add_signature' %}">
         {% csrf_token %}
         <input type="file" name="pdf_file">
-        <button type="submit">Convert</button>
+        <input type="file" name="image_signature">
+        <button type="submit">Add signature</button>
     </form>
   </div>
 {% endblock %}
