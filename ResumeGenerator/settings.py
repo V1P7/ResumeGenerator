@@ -16,7 +16,6 @@ INSTALLED_APPS = [
     'builder.apps.BuilderConfig',
     'accounts.apps.AccountsConfig',
     'converter.apps.ConverterConfig',
-    'helper.apps.HelperConfig',
 ]
 
 MIDDLEWARE = [
